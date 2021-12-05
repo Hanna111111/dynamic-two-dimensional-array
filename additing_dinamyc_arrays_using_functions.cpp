@@ -31,7 +31,7 @@ initialize (int **arr, int rows, int colums)
     {
       for (int j = 0; j < colums; j++)
 	{
-	  arr[i][j] = rand () % 11 - 5;
+	  arr[i][j] = rand () % 100 + 1;
 	  cout << arr[i][j] << "     ";
 	}
       cout << endl;
@@ -39,6 +39,7 @@ initialize (int **arr, int rows, int colums)
 }
 
 //addition
+//haven't ending
 void
 addit (int **arr, int rows, int colums)
 {
@@ -47,8 +48,7 @@ addit (int **arr, int rows, int colums)
     {
       for (int j = 0; j < colums; j++)
 	{
-	      for (int count = 0; count < colums; count++)
-		{
+	      
 		  result += arr[i][count];
 		}
 	     cout << " \n " << i + 1 << "row " << i + 1 << " columns " << endl;
