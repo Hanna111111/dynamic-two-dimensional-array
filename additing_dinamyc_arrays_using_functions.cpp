@@ -5,83 +5,101 @@
 
 using namespace std;
 
-//initialize arrays
-int **creatingMatrix (int rows, int colums);
-void initialize (int **arr, int rows, int colums);
-void addit (int **arr, int rows, int colums);
 
-//creating
-int **
-creatingMatrix (int rows, int colums)
-{
+//function which create a matrix1
+int **creatingMatrix (int rows, int colums) {
+    
   int **arr = new int *[rows];
-  for (int i = 0; i < rows; i++)
-    {
+  
+  for (int i = 0; i < rows; i++){
       arr[i] = new int[colums];
     }
   return arr;
 }
 
-//fill in
-void
-initialize (int **arr, int rows, int colums)
-{
-  srand (time (0));
-  for (int i = 0; i < rows; i++)
-    {
-      for (int j = 0; j < colums; j++)
-	{
-	  arr[i][j] = rand () % 100 + 1;
-	  cout << arr[i][j] << "     ";
+
+//function - filling in
+void initialize (int **arr, int rows, int colums) {
+  
+  for (int i = 0; i < rows; i++){
+      for (int j = 0; j < colums; j++){
+	  arr[i][j] = rand () % 10 + 1;
 	}
       cout << endl;
     }
 }
 
-//addition
-//haven't ending
-void
-addit (int **arr, int rows, int colums)
-{
-  int result (0);
-  for (int i = 0; i < rows; i++)
-    {
-      for (int j = 0; j < colums; j++)
-	{
-	      
-		  result += arr[i][count];
-		}
-	     cout << " \n " << i + 1 << "row " << i + 1 << " columns " << endl;
-	      j = colums;
-	      result = 0;
-	}
+//function - output
+void funcOutput (int **arr, int rows, int colums){
+    
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < colums; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
     }
 }
 
-int
-main ()
-{
-  int rows, colums;
+//function - addition
+void addit (int **arr1, int **arr2, int **arrResult, int rows, int colums) {
+  for (int i = 0; i < rows; i++){
+      
+      for (int j = 0; j < colums; j++){
+          arrResult[i][j] = arr1[i][j] + arr2[i][j];
+    }
+}
+}
+
+//Freeing up memory
+void freeingUp (int **arr, int rows){
+    
+  for (int i = 0; i < rows; i++ ){
+		delete [] arr[i];
+  }
+	delete [] arr; 
+}
+
+int main (){
+    srand (time (0));
+    
+    int rows, colums;
+    int **arr1;
+    int **arr2;
+    int **arrResult;
+  
   cout << "Please, enter number of rows: " << endl;
   cin >> rows;
+  
   cout << " Please, enter number of columns: " << endl;
   cin >> colums;
+  
+  arr1 = creatingMatrix(rows, colums);
+  arr2 = creatingMatrix(rows, colums);
+  arrResult = creatingMatrix(rows, colums);
+  
   cout << endl;
 
   cout << endl;
-  int **arr;
   
-  arr = creatingMatrix(rows, colums); 
-initialize(arr, rows, colums); 
-	addit(arr, rows, colums);
-  
-  //Freeing up memory
-  for ( int i = 0; i < rows; i++ )
-	{
-		delete [] arr[ i ];
-	}
-	delete [] arr;
+    initialize (arr1, rows, colums);
+    initialize (arr2, rows, colums);
+   
+    addit(arr1, arr2, arrResult, rows, colums);
+    
+    funcOutput (arr1, rows, colums);
+    cout << "-------------------------------------------" <<endl;
+    
+    funcOutput (arr2, rows, colums);
+    cout <<"-------------------------------------------" <<endl;
+    
+    funcOutput (arrResult, rows, colums);
+    cout << "-------------------------------------------" <<endl;
 
-	return 0;
+    
+    freeingUp (arr1, rows);
+    freeingUp (arr2, rows);
+    freeingUp (arrResult, rows);
+  
+
   return 0;
 }
